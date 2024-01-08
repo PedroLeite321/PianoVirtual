@@ -129,3 +129,7 @@ header .column span {
     background: linear-gradient(to bottom #333 0%, #000 100%);
     transform:translateY(0.6px);
 }
+
+.piano-keys .key.hide span  {
+    display:none;
+}

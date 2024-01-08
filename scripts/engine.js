@@ -1,6 +1,9 @@
 const gameSetup  = () => {
     const pianoKeys =   document.querySelectorAll(".piano-keys .key");
+    const volumeSlider = document.querySelector(".volume-slider input");
+    const keysCheck = document.querySelector(".keys-check input");
 
+    let mapedKeys = [];
     let audio = new Audio("./tunes/a.wav");
 
     const playSound = (key) =>  {
@@ -17,10 +20,23 @@ const gameSetup  = () => {
         //data set is used to access values.
         console.log(key.dataset.key);
         key.addEventListener("click", () => {playSound(key.dataset.key)} );
+        mapedKeys.push(key.dataset.key);
     })
     
     document.addEventListener("keydown", (e) => {
-        playSound(e.key);
-    } )
+
+        if( mapedKeys.includes(e.key) ) {
+            playSound(e.key);
+        }
+    } );
+
+    const handleVolume = (e)    =>  {
+        audio.volume = e.target.value;
+    }
+    const showHideKeys = () =>  {
+        pianoKeys.forEach(key => key.classList.toggle("hide"));
+    }
+    volumeSlider.addEventListener("input", handleVolume);
+    keysCheck.addEventListener("click", showHideKeys);
 }
 gameSetup();
